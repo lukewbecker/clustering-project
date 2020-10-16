@@ -25,7 +25,7 @@ Initial Questions:
 
 ### Hypotheses:
 
-- $ H_0 $: Properties with 2 or more bedrooms do not have higher value than average property
+- $H_0$: Properties with 2 or more bedrooms do not have higher value than average property
 
 - Ha: Properties with 2 or more bedrooms do have higher value than average property
 
