@@ -74,7 +74,7 @@ def drop_cols(df):
     '''
     Use this function if the zillow dataframe has extra id columns after using the sql acquire functions.
     '''
-    df.drop(columns = ['id.1', 'id', 'pid', 'propertyzoningdesc','heatingorsystemtypeid', 'propertylandusedesc', 'finishedsquarefeet12', 'calculatedbathnbr', 'heatingorsystemdesc', 'buildingqualitytypeid', 'regionidzip', 'assessmentyear', 'tdate', 'censustractandblock'], inplace = True)
+    df.drop(columns = ['fullbathcnt', 'parcelid', 'id.1', 'id', 'pid', 'propertyzoningdesc', "propertycountylandusecode", 'heatingorsystemtypeid', 'regionidcity', 'regionidcounty', 'unitcnt','propertylandusedesc', 'rawcensustractandblock', 'finishedsquarefeet12', 'calculatedbathnbr', 'heatingorsystemdesc', 'buildingqualitytypeid', 'regionidzip', 'assessmentyear', 'tdate', 'censustractandblock'], inplace = True)
     return df
 
 def prep_data(df, id_list):
@@ -87,10 +87,10 @@ def prep_data(df, id_list):
     '''
     # Taking out these rows and columns as well.
     df = df[(df.bedroomcnt > 0) & (df.bathroomcnt > 0)]
-    df.unitcnt = df.unitcnt.fillna(1)
+    # df.unitcnt = df.unitcnt.fillna(1)
     df.latitude = df.latitude / 1_000_000
     df.longitude = df.longitude / 1_000_000
-    # df['propertycountylandusecode'] = df['propertycountylandusecode'].astype(int)
+
 
     # changing the year to an int.
     # df["yearbuilt"] = df["yearbuilt"].astype('int')
@@ -143,7 +143,6 @@ def impute_missing_values_all(train, validate, test):
     "landtaxvaluedollarcnt",
     "structuretaxvaluedollarcnt",
     "calculatedfinishedsquarefeet",
-    "fullbathcnt",
     "lotsizesquarefeet",
     "age"
     ]
@@ -159,7 +158,6 @@ def impute_missing_values_all(train, validate, test):
     # Categorical/Discrete columns to use mode to replace nulls
 
     cols2 = [
-        "regionidcity",
         "yearbuilt",
     ]
 
