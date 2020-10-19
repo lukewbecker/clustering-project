@@ -74,7 +74,7 @@ def drop_cols(df):
     '''
     Use this function if the zillow dataframe has extra id columns after using the sql acquire functions.
     '''
-    df.drop(columns = ['id.1', 'id', 'pid', 'propertyzoningdesc', 'calculatedbathnbr', 'heatingorsystemdesc', 'propertylandusedesc', 'rawcensustractandblock', 'finishedsquarefeet12'], inplace = True)
+    df.drop(columns = ['id.1', 'id', 'pid', 'propertyzoningdesc','heatingorsystemtypeid', 'propertylandusedesc', 'finishedsquarefeet12', 'calculatedbathnbr', 'heatingorsystemdesc', 'buildingqualitytypeid', 'regionidzip', 'assessmentyear', 'tdate', 'censustractandblock'], inplace = True)
     return df
 
 def prep_data(df, id_list):
@@ -85,11 +85,12 @@ def prep_data(df, id_list):
     The function will remove all property use ids that are not in the `id_list` argument list.
     This function will effectively reduce the number of rows, not removing any columns.
     '''
-    # Taking out these rows as well.
+    # Taking out these rows and columns as well.
     df = df[(df.bedroomcnt > 0) & (df.bathroomcnt > 0)]
     df.unitcnt = df.unitcnt.fillna(1)
     df.latitude = df.latitude / 1_000_000
     df.longitude = df.longitude / 1_000_000
+    # df['propertycountylandusecode'] = df['propertycountylandusecode'].astype(int)
 
     # changing the year to an int.
     # df["yearbuilt"] = df["yearbuilt"].astype('int')
@@ -144,7 +145,7 @@ def impute_missing_values_all(train, validate, test):
     "calculatedfinishedsquarefeet",
     "fullbathcnt",
     "lotsizesquarefeet",
-    "heatingorsystemtypeid"
+    "age"
     ]
 
 
@@ -158,12 +159,8 @@ def impute_missing_values_all(train, validate, test):
     # Categorical/Discrete columns to use mode to replace nulls
 
     cols2 = [
-        "buildingqualitytypeid",
         "regionidcity",
-        "regionidzip",
         "yearbuilt",
-        "regionidcity",
-        "censustractandblock"
     ]
 
     for col in cols2:
@@ -172,15 +169,18 @@ def impute_missing_values_all(train, validate, test):
         validate[col].fillna(value=mode, inplace=True)
         test[col].fillna(value=mode, inplace=True)
     
-    # Taking care of unit count.
-    # cols3 = [
-    #     "unitcnt"
-    # ]
+    # Taking care of cols using mean.
+    cols3 = [
+        "acres",
+        "structure_dollar_per_sqft",
+        "land_dollar_per_sqft",
+        "taxrate"
+    ]
 
-    # for col in cols3:
-    #     train[col].fillna(value=1, inplace=True)
-    #     validate[col].fillna(value=1, inplace=True)
-    #     test[col].fillna(value=1, inplace=True)
+    for col in cols3:
+        train[col].fillna(value=train[col].mean(), inplace=True)
+        validate[col].fillna(value=validate[col].mean(), inplace=True)
+        test[col].fillna(value=test[col].mean(), inplace=True)
 
     
     # cols4 = ["heatingorsystemdesc"]
@@ -235,8 +235,6 @@ def wrangle_zillow():
     # Handling missing values. All I need to input is the dataframe (df), the rest of the parameters are already set.
     def handle_missing_values(df, col_limit = .6, row_limit = .6):
 
-
-        df.drop(columns = ['id.1', 'id', 'pid', 'propertyzoningdesc', 'calculatedbathnbr', 'heatingorsystemdesc'], inplace = True)
         # Setting the threshold for columns to drop:
         col_thresh = int(round(col_limit * len(df.index), 0))
         df.dropna(axis = 1, thresh = col_thresh, inplace = True)
@@ -276,7 +274,7 @@ def wrangle_zillow():
         "calculatedfinishedsquarefeet",
         "fullbathcnt",
         "lotsizesquarefeet",
-        "heatingorsystemtypeid"
+        # "heatingorsystemtypeid"
         ]
 
 
@@ -295,7 +293,7 @@ def wrangle_zillow():
             "regionidzip",
             "yearbuilt",
             "regionidcity",
-            "censustractandblock"
+            # "censustractandblock"
         ]
 
         for col in cols2:
