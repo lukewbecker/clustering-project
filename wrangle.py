@@ -74,7 +74,7 @@ def drop_cols(df):
     '''
     Use this function if the zillow dataframe has extra id columns after using the sql acquire functions.
     '''
-    df.drop(columns = ['fullbathcnt', 'parcelid', 'id.1', 'id', 'pid', 'propertyzoningdesc', "propertycountylandusecode", 'heatingorsystemtypeid', 'regionidcity', 'regionidcounty', 'unitcnt','propertylandusedesc', 'rawcensustractandblock', 'finishedsquarefeet12', 'calculatedbathnbr', 'heatingorsystemdesc', 'buildingqualitytypeid', 'regionidzip', 'assessmentyear', 'tdate', 'censustractandblock'], inplace = True)
+    df.drop(columns = ['fullbathcnt', 'parcelid', 'id.1', 'id', 'pid', 'propertyzoningdesc', "propertycountylandusecode", 'heatingorsystemtypeid', 'regionidcounty', 'unitcnt','propertylandusedesc', 'rawcensustractandblock', 'finishedsquarefeet12', 'calculatedbathnbr', 'heatingorsystemdesc', 'buildingqualitytypeid', 'regionidzip', 'assessmentyear', 'tdate', 'censustractandblock'], inplace = True)
     return df
 
 def prep_data(df, id_list):
@@ -144,6 +144,7 @@ def impute_missing_values_all(train, validate, test):
     "structuretaxvaluedollarcnt",
     "calculatedfinishedsquarefeet",
     "lotsizesquarefeet",
+    'regionidcity',
     "age"
     ]
 
