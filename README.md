@@ -5,10 +5,10 @@
 ## Description: 
 The purpose of this project is to develop a model that is able to predict the log error of Zillow's Zestimate in predicting values in three counties in California, using the Zillow dataset.
 
-In addition, we plan on these deliverables:
-    1. Map showing variations in tax rates by county.
-    2. Acquire.py, Prep.py, Wrangle.py, and Model.py files to be able to recreate our efforts.
-    3. Presentation with the results of our findings.
+In addition, there are these deliverables:
+    1. Acquire.py, Prep.py, Wrangle.py, and explore.py files to assist in recreating project.
+    2. Juptyer Notebook with exploration and modeling of the data.
+    3. Readme with summary of project outline and data dictionary.
 
 ## Project Goals
 
