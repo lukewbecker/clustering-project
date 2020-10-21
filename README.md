@@ -52,7 +52,12 @@ Initial ideas for testing.
 | calculatedbathnbr | Number of both bedrooms and bathrooms in property |
 | calculatedfinishedsquarefeet | Total Square Footage of the property |
 | fullbathcnt | Number of full bathrooms in property (excludes half bathrooms) |
+| centroid_latitude | The centroid of latitude created via clustering |
+| centroid_longitude | The centroid of longitutde created via clustering |
+| age | Number of years since house was built |
+| location_cluster_0 | Subset of the location clustering | 
+| fips | A federal code designating areas of the country that functions similarly to a zip code |
 
 | Target | Definition |
 | --- | --- |
-| taxvaluedollarcnt | Value of the property |
+| logerror | Log error of Zestimate vs actual property value |
