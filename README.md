@@ -1,9 +1,9 @@
 # Zillow Regression Project
 
-### Authors: Austin Aranda, Luke Becker
+### Author: Luke Becker
 
 ## Description: 
-The purpose of this project is to develop a model that is able to predict property values in Los Angeles, California, using the Zillow dataset. We intend to discover the key features that most accurately predict property value. 
+The purpose of this project is to develop a model that is able to predict the log error of Zillow's Zestimate in predicting values in three counties in California, using the Zillow dataset.
 
 In addition, we plan on these deliverables:
     1. Map showing variations in tax rates by county.
@@ -12,26 +12,35 @@ In addition, we plan on these deliverables:
 
 ## Project Goals
 
+- Discover if by using clustering models and algorithmns, I can produce a model that better predicts the log error of Zillow's Zestimate of property values.
+- Utilize Clustering techniques to produce visuals and new features for modeling
 
 
 ## Project Planning
 
 Initial Questions:
-- Does number of bedrooms matter to the property value?
-- Does location within the state or county affect overal property value?
-- Is total square footage independent of property value?
-- Does a combined bedroom/bathroom square footage feature have better correlation with the target variable than the separate features?
+- Does number of bedrooms matter to the log error of the Zestimate?
+- Does location within the state or county affect overall log error?
+- Are there clusters of related features, such as location information that can yield more useful derived features to model on?
+- Do these features created from clustering actually produce a better model to predict the Zestimate's log error?
 
 
-### Hypotheses:
 
-- H0: Properties with 2 or more bedrooms do not have higher value than average property
+### Hypothesis Tests:
 
-- Ha: Properties with 2 or more bedrooms do have higher value than average property
+Initial ideas for testing.
 
-- H0: Properties with 2 or more bedrooms do not have more square footage than average property
+##### Features: `latitude` and `logitude`
 
-- Ha: Properties with 2 or more bedrooms do not have more square footage than average property
+- H0: The population means for the 4 location clusters are all equal (**no** significant difference)
+
+- Ha: The population means for the 4 location clusters are not equal (there **is** a significant difference)
+
+##### Features: bedroomcnt and bathroomct
+
+- H0: The population means for the 4 rooms clusters are all equal (**no** significant difference)
+
+- Ha: The population means for the 4 rooms clusters are not equal (there **is** a significant difference)
 
 
 ## Data Dictionary
